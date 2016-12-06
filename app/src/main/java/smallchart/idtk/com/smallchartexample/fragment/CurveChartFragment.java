@@ -47,13 +47,13 @@ public class CurveChartFragment extends BaseFragment {
             mPointArrayList.add(new PointF(points[i][0], points[i][1]));
         }
         mCurveData.setValue(mPointArrayList);
-        mCurveData.setColor(Color.RED);
+//        mCurveData.setColor(Color.RED);
 
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
         mCurveData.setDrawable(drawable);
 
-        mCurveData.setPointShape(PointShape.SOLIDROUND);
-        mCurveData.setPaintWidth(pxTodp(3));
+//        mCurveData.setPointShape(PointShape.SOLIDROUND);
+//        mCurveData.setPaintWidth(pxTodp(3));
         mCurveData.setTextSize(pxTodp(10));
         mDataList.add(mCurveData);
     }
