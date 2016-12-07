@@ -13,7 +13,7 @@ SdkVersion >= 19
 ## Chart types
 * Curve Chart(fill)
 
-![fill different color](http://ww4.sinaimg.cn/large/628a632agw1faie248lo1j20lc0zkabt.jpg)
+![fill different color](http://ww1.sinaimg.cn/mw690/628a632agw1faie65ob75j20lc0zkabt.jpg)
 
 <img src="https://github.com/Idtk/SmallChart/blob/master/image/curve.png" alt="curve" title="curve" width="300"/><br>
 
