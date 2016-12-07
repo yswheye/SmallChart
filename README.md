@@ -5,11 +5,15 @@
 ## Introduction
 &nbsp;&nbsp;&nbsp;&nbsp;SmallChart是一个开源的Android图表库，折线图、曲线图(可填充)、柱状图、扇形图、雷达图，共5种图表类型。特色的组合图表可以任意组合折线图、曲线图、柱状图。可以通过输入的数据以及可设置的颜色、画笔大小等属性方便的创建图表。<br>
 
+*添加支持填充不同颜色*
+
 ## Version
 SdkVersion >= 19
 
 ## Chart types
 * Curve Chart(fill)
+
+![fill different color](http://ww4.sinaimg.cn/large/628a632agw1faie248lo1j20lc0zkabt.jpg)
 
 <img src="https://github.com/Idtk/SmallChart/blob/master/image/curve.png" alt="curve" title="curve" width="300"/><br>
 
@@ -150,10 +154,6 @@ limitations under the License.
 ```
 ******
 
-## About Me
-
-&nbsp;&nbsp;**博客: www.idtkm.com**<br>
+## From
 &nbsp;&nbsp;**GitHub: https://github.com/Idtk**<br>
-&nbsp;&nbsp;**微博: http://weibo.com/Idtk**<br>
-&nbsp;&nbsp;**邮箱: IdtkMa@gmail.com**<br>
 
