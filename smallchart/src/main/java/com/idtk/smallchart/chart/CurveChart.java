@@ -23,7 +23,9 @@ public class CurveChart extends BarLineCurveChart<ICurveData> implements ICurveC
     private float pointOutRadius;
     private float pointInRadius;
     //    private PointData.PointShape pointShape  = PointData.PointShape.CIRCLE;
-    private boolean isPointInRadius = false, isPointOutRadius = false;
+//    private boolean isPointInRadius = false, isPointOutRadius = false;
+
+    private String[] xLabels;
 
     public CurveChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -35,6 +37,14 @@ public class CurveChart extends BarLineCurveChart<ICurveData> implements ICurveC
 
     public CurveChart(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public String[] getxLabels() {
+        return xLabels;
+    }
+
+    public void setxLabels(String[] xLabels) {
+        this.xLabels = xLabels;
     }
 
     @Override
@@ -61,8 +71,12 @@ public class CurveChart extends BarLineCurveChart<ICurveData> implements ICurveC
     protected void axisScale() {
         mXAxisData.setAxisScale(mXAxisData.getAxisLength() / (mXAxisData.getMaximum() - mXAxisData.getMinimum()));
         mYAxisData.setAxisScale(mYAxisData.getAxisLength() / (mYAxisData.getMaximum() - mYAxisData.getMinimum()));
-        mYAxisData.setMaximum(40f);
-        mXAxisRender = new XAxisRender(mXAxisData);
+        mYAxisData.setMaximum(50f);
+        if (xLabels != null) {
+            mXAxisRender = new XAxisRender(mXAxisData, xLabels);
+        } else {
+            mXAxisRender = new XAxisRender(mXAxisData);
+        }
         mYAxisRender = new YAxisRender(mYAxisData, mXAxisData);
     }
 

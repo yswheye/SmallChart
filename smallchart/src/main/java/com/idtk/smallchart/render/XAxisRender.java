@@ -3,6 +3,7 @@ package com.idtk.smallchart.render;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
 
 import com.idtk.smallchart.interfaces.iData.IXAxisData;
 
@@ -21,9 +22,25 @@ public class XAxisRender extends AxisRender {
     private NumberFormat numberFormat;
     private PointF mPoint = new PointF();
 
+    private String[] xLabels;
+
     public XAxisRender(IXAxisData xAxisData) {
         super();
         this.xAxisData = xAxisData;
+        mPaint.setColor(xAxisData.getColor());
+        mPaint.setTextSize(xAxisData.getTextSize());
+        mPaint.setStrokeWidth(xAxisData.getPaintWidth());
+        /**
+         * 设置小数点位数
+         */
+        numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(xAxisData.getDecimalPlaces());
+    }
+
+    public XAxisRender(IXAxisData xAxisData, String[] xAxisLabel) {
+        super();
+        this.xAxisData = xAxisData;
+        this.xLabels = xAxisLabel;
         mPaint.setColor(xAxisData.getColor());
         mPaint.setTextSize(xAxisData.getTextSize());
         mPaint.setStrokeWidth(xAxisData.getPaintWidth());
@@ -39,9 +56,11 @@ public class XAxisRender extends AxisRender {
         canvas.drawLine(0, 0, xAxisData.getAxisLength(), 0, mPaint);
 
         for (int i = 0; (xAxisData.getInterval() * i + xAxisData.getMinimum()) <= xAxisData.getMaximum(); i++) {
-            canvas.drawLine((float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()), 0,
-                    (float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()),
-                    -xAxisData.getAxisLength() / 100, mPaint);
+            if (i != 0) {
+                canvas.drawLine((float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()) + 2, 0,
+                        (float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()) + 2,
+                        -xAxisData.getAxisLength() / 100 - 3, mPaint);
+            }
             canvas.save();
             canvas.scale(1, -1);
             /**
@@ -50,9 +69,14 @@ public class XAxisRender extends AxisRender {
             float TextPathX = (float) (xAxisData.getInterval() * i * xAxisData.getAxisScale());
             float TextPathY = (mPaint.descent() + mPaint.ascent()) - xAxisData.getAxisLength() / 100;
             mPoint.x = TextPathX;
-            mPoint.y = -TextPathY;
-            textCenter(new String[]{numberFormat.format(xAxisData.getInterval() * i + xAxisData.getMinimum())},
-                    mPaint, canvas, mPoint, Paint.Align.CENTER);
+            mPoint.y = -TextPathY + 10;// 下移10
+            Log.d("_haha", "*******point: " + mPoint.toString());
+            if (xLabels == null) {
+                textCenter(new String[]{numberFormat.format(xAxisData.getInterval() * i + xAxisData.getMinimum())},
+                        mPaint, canvas, mPoint, Paint.Align.CENTER);
+            } else {
+                textCenter(new String[]{xLabels[i]}, mPaint, canvas, mPoint, Paint.Align.CENTER);
+            }
             canvas.restore();
         }
         /**

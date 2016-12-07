@@ -40,14 +40,15 @@ public class CurveChartFragment extends BaseFragment {
         /**
          * setting
          */
+        chartview.setAxisTextSize(18f);
 
-        initData();
+        initData(chartview);
 //        curveChart.setData(mCurveData);
         chartview.setDataList(mDataList);
         return view;
     }
 
-    private void initData() {
+    private void initData(CurveChart chartview) {
         for (int i = 0; i < 8; i++) {
             mPointArrayList.add(new PointF(points[i][0], points[i][1]));
         }
@@ -62,6 +63,8 @@ public class CurveChartFragment extends BaseFragment {
         drawableEntities.add(new DrawableEntity(drawable2, 3));
         drawableEntities.add(new DrawableEntity(drawable3, 2));
         mCurveData.setDrawableEntitys(drawableEntities);
+        String[] xLebel = {"12-01", "12-02", "12-03", "12-04", "12-05", "12-06", "12-07", "12-08"};
+        chartview.setxLabels(xLebel);
 
 //        mCurveData.setPointShape(PointShape.SOLIDROUND);
 //        mCurveData.setPaintWidth(pxTodp(3));

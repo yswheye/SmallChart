@@ -121,7 +121,7 @@ public class CurveChartRender extends ChartRender {
             int items = curveData.getValue().size() - 1;
             int itemLength = XAxisLength / items;
             ArrayList<DrawableEntity> drawableEntities = curveData.getDrawableEntitys();
-            int startL = 0;
+            int startL = 3;
             for (DrawableEntity drawableEntity : drawableEntities) {
                 drawableEntity.getDrawable().setBounds(startL, -(int) yAxisData.getAxisLength() - 100, startL + itemLength * drawableEntity.getLength(), 0);
                 startL += itemLength * drawableEntity.getLength();
