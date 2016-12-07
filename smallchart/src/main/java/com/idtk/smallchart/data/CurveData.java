@@ -3,8 +3,11 @@ package com.idtk.smallchart.data;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
+import com.idtk.smallchart.color.DrawableEntity;
 import com.idtk.smallchart.interfaces.iData.ICurveData;
 import com.idtk.smallchart.interfaces.iData.IPointData;
+
+import java.util.ArrayList;
 
 /**
  * Created by Idtk on 2016/6/7.
@@ -15,6 +18,7 @@ import com.idtk.smallchart.interfaces.iData.IPointData;
 public class CurveData extends BarLineCurveData implements ICurveData,IPointData {
     private float intensity = 0.2f;
     private Drawable drawable;
+    private ArrayList<DrawableEntity> drawableEntities;
 //    public float NOSETING=-1;
     private float outRadius = NOSETING;
     private float inRadius = NOSETING;
@@ -36,6 +40,16 @@ public class CurveData extends BarLineCurveData implements ICurveData,IPointData
 
     public Drawable getDrawable() {
         return drawable;
+    }
+
+    @Override
+    public void setDrawableEntitys(ArrayList<DrawableEntity> drawableEntitys) {
+        this.drawableEntities = drawableEntitys;
+    }
+
+    @Override
+    public ArrayList<DrawableEntity> getDrawableEntitys() {
+        return drawableEntities;
     }
 
     public void setOutRadius(float outRadius) {
@@ -69,6 +83,8 @@ public class CurveData extends BarLineCurveData implements ICurveData,IPointData
     public Paint getInPaint() {
         return inPaint;
     }
+
+
 
     @Override
     public void setPointShape(PointShape pointShape) {

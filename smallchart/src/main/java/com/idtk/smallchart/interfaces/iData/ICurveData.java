@@ -2,6 +2,10 @@ package com.idtk.smallchart.interfaces.iData;
 
 import android.graphics.drawable.Drawable;
 
+import com.idtk.smallchart.color.DrawableEntity;
+
+import java.util.ArrayList;
+
 /**
  * Created by Idtk on 2016/6/7.
  * Blog : http://www.idtkm.com
@@ -25,4 +29,8 @@ public interface ICurveData extends IBarLineCurveData {
     void setDrawable(Drawable drawable);
 
     Drawable getDrawable();
+
+    void setDrawableEntitys(ArrayList<DrawableEntity> drawableEntitys);
+
+    ArrayList<DrawableEntity> getDrawableEntitys();
 }

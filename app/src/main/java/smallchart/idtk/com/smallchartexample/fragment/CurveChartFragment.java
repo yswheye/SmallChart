@@ -1,6 +1,5 @@
 package smallchart.idtk.com.smallchartexample.fragment;
 
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.idtk.smallchart.chart.CurveChart;
+import com.idtk.smallchart.color.DrawableEntity;
 import com.idtk.smallchart.data.CurveData;
-import com.idtk.smallchart.data.PointShape;
 import com.idtk.smallchart.interfaces.iData.ICurveData;
 
 import java.util.ArrayList;
@@ -49,8 +48,14 @@ public class CurveChartFragment extends BaseFragment {
         mCurveData.setValue(mPointArrayList);
 //        mCurveData.setColor(Color.RED);
 
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
-        mCurveData.setDrawable(drawable);
+        Drawable drawable1 = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
+        Drawable drawable2 = ContextCompat.getDrawable(getContext(), R.drawable.fade_blue);
+        Drawable drawable3 = ContextCompat.getDrawable(getContext(), R.drawable.fade_green);
+        ArrayList<DrawableEntity> drawableEntities = new ArrayList<>();
+        drawableEntities.add(new DrawableEntity(drawable1, 2));
+        drawableEntities.add(new DrawableEntity(drawable2, 3));
+        drawableEntities.add(new DrawableEntity(drawable3, 2));
+        mCurveData.setDrawableEntitys(drawableEntities);
 
 //        mCurveData.setPointShape(PointShape.SOLIDROUND);
 //        mCurveData.setPaintWidth(pxTodp(3));

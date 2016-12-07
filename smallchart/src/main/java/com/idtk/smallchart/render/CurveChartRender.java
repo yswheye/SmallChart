@@ -1,14 +1,12 @@
 package com.idtk.smallchart.render;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.util.Log;
 
+import com.idtk.smallchart.color.DrawableEntity;
 import com.idtk.smallchart.interfaces.iData.ICurveData;
-import com.idtk.smallchart.interfaces.iData.IPointData;
 import com.idtk.smallchart.interfaces.iData.IXAxisData;
 import com.idtk.smallchart.interfaces.iData.IYAxisData;
 
@@ -108,25 +106,27 @@ public class CurveChartRender extends ChartRender {
         /**
          * 填充曲线图
          */
-        if (curveData.getDrawable() != null) {
+        if (curveData.getDrawableEntitys() != null) {
             //填充颜色
             cubicFillPath.lineTo((curveData.getValue().get(curveData.getValue().size() - 1).x
                     - xAxisData.getMinimum()) * xAxisData.getAxisScale(), 0);
-            float start = curveData.getValue().get(curveData.getValue().size() - 1).x
-                    - xAxisData.getMinimum() * xAxisData.getAxisScale();
-            Log.d("_haha", "from = " + start + ", 0");
             cubicFillPath.lineTo((curveData.getValue().get(0).x - xAxisData.getMinimum()) *
                     xAxisData.getAxisScale(), 0);
-            float end = (curveData.getValue().get(0).x - xAxisData.getMinimum()) *
-                    xAxisData.getAxisScale();
-            Log.d("_haha", "end = " + end + ", 0");
-            pointList
             cubicFillPath.close();
 
             canvas.save();
             canvas.clipPath(cubicFillPath);
-            curveData.getDrawable().setBounds(-canvas.getWidth() + (int) xAxisData.getAxisLength(), -(int) yAxisData.getAxisLength(), (int) xAxisData.getAxisLength(), canvas.getHeight() - (int) yAxisData.getAxisLength());
-            curveData.getDrawable().draw(canvas);
+//            curveData.getDrawable().setBounds(-canvas.getWidth() + (int) xAxisData.getAxisLength(), -(int) yAxisData.getAxisLength(), (int) xAxisData.getAxisLength(), canvas.getHeight() - (int) yAxisData.getAxisLength());
+            int XAxisLength = (int) xAxisData.getAxisLength();
+            int items = curveData.getValue().size() - 1;
+            int itemLength = XAxisLength / items;
+            ArrayList<DrawableEntity> drawableEntities = curveData.getDrawableEntitys();
+            int startL = 0;
+            for (DrawableEntity drawableEntity : drawableEntities) {
+                drawableEntity.getDrawable().setBounds(startL, -(int) yAxisData.getAxisLength(), startL + itemLength * drawableEntity.getLength(), 0);
+                startL += itemLength * drawableEntity.getLength();
+                drawableEntity.getDrawable().draw(canvas);
+            }
             canvas.restore();
             cubicFillPath.rewind();
         }
