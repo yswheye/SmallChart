@@ -26,10 +26,10 @@ public class CurveChartRender extends ChartRender {
     private Paint cubicPaint = new Paint();
     private IXAxisData xAxisData;
     private IYAxisData yAxisData;
-    private ArrayList<PointF> pointList = new ArrayList<>();
-    private PointRender mPointRender = new PointRender();
-    private Paint outpointPaint = new Paint();
-    private Paint inPointPaint = new Paint();
+//    private ArrayList<PointF> pointList = new ArrayList<>();
+//    private PointRender mPointRender = new PointRender();
+//    private Paint outpointPaint = new Paint();
+//    private Paint inPointPaint = new Paint();
     private float intensity;
     private float offset;
 
@@ -41,13 +41,13 @@ public class CurveChartRender extends ChartRender {
         this.offset = offset;
         cubicPaint.setStyle(Paint.Style.STROKE);
         cubicPaint.setAntiAlias(true);
-        outpointPaint.setStyle(Paint.Style.FILL);
-        outpointPaint.setAntiAlias(true);
-        inPointPaint.setStyle(Paint.Style.FILL);
-        inPointPaint.setAntiAlias(true);
+//        outpointPaint.setStyle(Paint.Style.FILL);
+//        outpointPaint.setAntiAlias(true);
+//        inPointPaint.setStyle(Paint.Style.FILL);
+//        inPointPaint.setAntiAlias(true);
         cubicPaint.setStrokeWidth(curveData.getPaintWidth());
-        outpointPaint.setStrokeWidth(cubicPaint.getStrokeWidth());
-        inPointPaint.setStrokeWidth(cubicPaint.getStrokeWidth());
+//        outpointPaint.setStrokeWidth(cubicPaint.getStrokeWidth());
+//        inPointPaint.setStrokeWidth(cubicPaint.getStrokeWidth());
         intensity = curveData.getIntensity();
     }
 
@@ -63,14 +63,14 @@ public class CurveChartRender extends ChartRender {
         PointF cur = prev;
         PointF next = curveData.getValue().get(1);
 
-        pointList.clear();
+//        pointList.clear();
         cubicPath.moveTo((cur.x - xAxisData.getMinimum()) * xAxisData.getAxisScale(),
                 -(cur.y - yAxisData.getMinimum()) * yAxisData.getAxisScale() * animatedValue);
         /**
          * 保存
          */
-        pointList.add(new PointF((cur.x - xAxisData.getMinimum()) * xAxisData.getAxisScale(),
-                -(cur.y - yAxisData.getMinimum()) * yAxisData.getAxisScale() * animatedValue));
+//        pointList.add(new PointF((cur.x - xAxisData.getMinimum()) * xAxisData.getAxisScale(),
+//                -(cur.y - yAxisData.getMinimum()) * yAxisData.getAxisScale() * animatedValue));
 
         for (int j = 1; j < curveData.getValue().size(); j++) {
             prevPrev = curveData.getValue().get(j == 1 ? 0 : j - 2);
@@ -92,8 +92,8 @@ public class CurveChartRender extends ChartRender {
             /**
              * 保存
              */
-            pointList.add(new PointF((cur.x - xAxisData.getMinimum()) * xAxisData.getAxisScale(),
-                    -((cur.y - yAxisData.getMinimum()) * yAxisData.getAxisScale()) * animatedValue));
+//            pointList.add(new PointF((cur.x - xAxisData.getMinimum()) * xAxisData.getAxisScale(),
+//                    -((cur.y - yAxisData.getMinimum()) * yAxisData.getAxisScale()) * animatedValue));
         }
 
         canvas.save();

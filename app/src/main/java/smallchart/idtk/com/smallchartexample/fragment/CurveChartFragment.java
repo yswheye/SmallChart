@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import smallchart.idtk.com.smallchartexample.R;
 
+import static smallchart.idtk.com.smallchartexample.R.id.curveChart;
+
 /**
  * Created by Idtk on 2016/6/26.
  * Blog : http://www.idtkm.com
@@ -34,10 +36,14 @@ public class CurveChartFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_curvechart,container,false);
-        CurveChart curveChart = (CurveChart) view.findViewById(R.id.curveChart);
+        CurveChart chartview = (CurveChart) view.findViewById(curveChart);
+        /**
+         * setting
+         */
+
         initData();
 //        curveChart.setData(mCurveData);
-        curveChart.setDataList(mDataList);
+        chartview.setDataList(mDataList);
         return view;
     }
 

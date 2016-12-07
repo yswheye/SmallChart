@@ -36,34 +36,34 @@ public class XAxisRender extends AxisRender {
 
     @Override
     public void drawGraph(Canvas canvas) {
-        canvas.drawLine(0,0,xAxisData.getAxisLength(),0,mPaint);
+        canvas.drawLine(0, 0, xAxisData.getAxisLength(), 0, mPaint);
 
-        for (int i=0;(xAxisData.getInterval()*i+xAxisData.getMinimum())<=xAxisData.getMaximum();i++){
-            canvas.drawLine((float) (xAxisData.getInterval()*i*xAxisData.getAxisScale()),0,
-                    (float) (xAxisData.getInterval()*i*xAxisData.getAxisScale()),
-                    -xAxisData.getAxisLength()/100,mPaint);
+        for (int i = 0; (xAxisData.getInterval() * i + xAxisData.getMinimum()) <= xAxisData.getMaximum(); i++) {
+            canvas.drawLine((float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()), 0,
+                    (float) (xAxisData.getInterval() * i * xAxisData.getAxisScale()),
+                    -xAxisData.getAxisLength() / 100, mPaint);
             canvas.save();
-            canvas.scale(1,-1);
+            canvas.scale(1, -1);
             /**
              * 坐标数值
              */
-            float TextPathX = (float) (xAxisData.getInterval()*i*xAxisData.getAxisScale());
-            float TextPathY = (mPaint.descent()+mPaint.ascent())-xAxisData.getAxisLength()/100;
+            float TextPathX = (float) (xAxisData.getInterval() * i * xAxisData.getAxisScale());
+            float TextPathY = (mPaint.descent() + mPaint.ascent()) - xAxisData.getAxisLength() / 100;
             mPoint.x = TextPathX;
             mPoint.y = -TextPathY;
-            textCenter(new String[]{numberFormat.format(xAxisData.getInterval()*i+xAxisData.getMinimum())},
-                    mPaint,canvas, mPoint, Paint.Align.CENTER);
+            textCenter(new String[]{numberFormat.format(xAxisData.getInterval() * i + xAxisData.getMinimum())},
+                    mPaint, canvas, mPoint, Paint.Align.CENTER);
             canvas.restore();
         }
         /**
          * 箭头
          */
-        canvas.drawLine(xAxisData.getAxisLength(),0,xAxisData.getAxisLength()*0.99f,xAxisData.getAxisLength()*0.01f,mPaint);
-        canvas.drawLine(xAxisData.getAxisLength(),0,xAxisData.getAxisLength()*0.99f,-xAxisData.getAxisLength()*0.01f,mPaint);
-        canvas.save();
-        canvas.scale(1,-1);
-        canvas.drawText(xAxisData.getUnit(),xAxisData.getAxisLength(),(mPaint.descent()+mPaint.ascent())-xAxisData.getAxisLength()/100,mPaint);
-        canvas.restore();
+//        canvas.drawLine(xAxisData.getAxisLength(),0,xAxisData.getAxisLength()*0.99f,xAxisData.getAxisLength()*0.01f,mPaint);
+//        canvas.drawLine(xAxisData.getAxisLength(),0,xAxisData.getAxisLength()*0.99f,-xAxisData.getAxisLength()*0.01f,mPaint);
+//        canvas.save();
+//        canvas.scale(1,-1);
+//        canvas.drawText(xAxisData.getUnit(),xAxisData.getAxisLength(),(mPaint.descent()+mPaint.ascent())-xAxisData.getAxisLength()/100,mPaint);
+//        canvas.restore();
     }
 
 }

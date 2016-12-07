@@ -42,7 +42,7 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
     protected YAxisRender mYAxisRender;
 
 
-//    protected ArrayList<ChartRender> chartRenderList = new ArrayList<>();
+    //    protected ArrayList<ChartRender> chartRenderList = new ArrayList<>();
     protected float animatedValue;
     public boolean isAnimated = true;
     protected ChartAnimator mChartAnimator;
@@ -64,8 +64,8 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mXAxisData.setAxisLength(mWidth*0.8f);
-        mYAxisData.setAxisLength(mHeight*0.8f);
+        mXAxisData.setAxisLength(mWidth * 0.8f);
+        mYAxisData.setAxisLength(mHeight * 0.8f);
         /*mXAxisData.setTextSize(axisTextSize);
         mYAxisData.setTextSize(axisTextSize);
         mXAxisData.setColor(axisColor);
@@ -77,7 +77,7 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
 
         animated();
 
-        if (convergenceFlag){
+        if (convergenceFlag) {
             /**
              * 循环收敛
              */
@@ -86,18 +86,18 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
         }
 
         axisScale();
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.translate(mViewWidth/2-mXAxisData.getAxisLength()/2,mViewHeight/2+mYAxisData.getAxisLength()/2);
+        canvas.translate(mViewWidth / 2 - mXAxisData.getAxisLength() / 2, mViewHeight / 2 + mYAxisData.getAxisLength() / 2);
         canvas.save();
-        canvas.scale(1,-1);
+        canvas.scale(1, -1);
         axisRender(canvas);
         canvas.restore();
         drawGraphical(canvas);
     }
+
     /**
      * 计算坐标轴刻度长度与View长度的比
      */
@@ -105,6 +105,7 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
 
     /**
      * 渲染X、Y轴
+     *
      * @param canvas 画布
      */
     protected abstract void axisRender(Canvas canvas);
@@ -150,17 +151,18 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
                 }
             };
             mChartAnimator = new ChartAnimator(mAnimatorUpdateListener);
-            mChartAnimator.animatedY(2000,1);
+            mChartAnimator.animatedY(2000, 1);
         }
     }
 
     /**
      * 图表渲染方法
+     *
      * @param canvas 渲染绘制的画布
      */
     protected void drawGraphical(Canvas canvas) {
-        for (int i=0; i<chartRenderList.size(); i++){
-            chartRenderList.get(i).drawGraph(canvas,animatedValue);
+        for (int i = 0; i < chartRenderList.size(); i++) {
+            chartRenderList.get(i).drawGraph(canvas, animatedValue);
         }
     }
 
@@ -168,15 +170,15 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
     public int getCurrentWidth() {
         convergenceFlag = false;
         int wrapSize;
-        if (mDataList!=null&&mDataList.size()>0){
-            NumberFormat numberFormat =NumberFormat.getPercentInstance();
+        if (mDataList != null && mDataList.size() > 0) {
+            NumberFormat numberFormat = NumberFormat.getPercentInstance();
             numberFormat.setMinimumFractionDigits(mXAxisData.getDecimalPlaces());
             paintText.setTextSize(mXAxisData.getTextSize());
             paintText.setStrokeWidth(mXAxisData.getPaintWidth());
             float xAxisWidth = paintText.measureText(numberFormat.format(mXAxisData.getMaximum()))
-                    *(float) Math.ceil((mXAxisData.getMaximum()-mXAxisData.getMinimum())/mXAxisData.getInterval());
-            wrapSize = (int) (xAxisWidth*1.2f);
-        }else {
+                    * (float) Math.ceil((mXAxisData.getMaximum() - mXAxisData.getMinimum()) / mXAxisData.getInterval());
+            wrapSize = (int) (xAxisWidth * 1.2f);
+        } else {
             wrapSize = 0;
         }
 //        LogUtil.d("TAGX",mXAxisData.getMaximum()+"__"+mXAxisData.getMinimum()+"__"+mXAxisData.getInterval());
@@ -185,25 +187,25 @@ public abstract class BarLineCurveChart<T extends IBarLineCurveData> extends Cha
 
     @Override
     public int getCurrentHeight() {
-        convergenceFlag =false;
+        convergenceFlag = false;
         Paint paintValue = new Paint();
         int wrapSize;
-        if (mDataList!=null&&mDataList.size()>0){
-            NumberFormat numberFormat =NumberFormat.getPercentInstance();
+        if (mDataList != null && mDataList.size() > 0) {
+            NumberFormat numberFormat = NumberFormat.getPercentInstance();
             numberFormat.setMinimumFractionDigits(mYAxisData.getDecimalPlaces());
             paintText.setStrokeWidth(mYAxisData.getPaintWidth());
             paintText.setTextSize(mYAxisData.getTextSize());
-            Paint.FontMetrics fontMetrics= paintText.getFontMetrics();
+            Paint.FontMetrics fontMetrics = paintText.getFontMetrics();
             float top = fontMetrics.top;
             float bottom = fontMetrics.bottom;
-            float yAxisWidth = (bottom-top)*(float) Math.ceil((mYAxisData.getMaximum()-mYAxisData.getMinimum())
-                    /mYAxisData.getInterval());
+            float yAxisWidth = (bottom - top) * (float) Math.ceil((mYAxisData.getMaximum() - mYAxisData.getMinimum())
+                    / mYAxisData.getInterval());
             paintValue.setStrokeWidth(mDataList.get(0).getPaintWidth());
             paintValue.setTextSize(mDataList.get(0).getTextSize());
-            Paint.FontMetrics fontMetricsValue= paintValue.getFontMetrics();
-            float valueWidth =  fontMetricsValue.bottom-fontMetricsValue.top;
-            wrapSize = (int) (yAxisWidth*2f+valueWidth*2);
-        }else {
+            Paint.FontMetrics fontMetricsValue = paintValue.getFontMetrics();
+            float valueWidth = fontMetricsValue.bottom - fontMetricsValue.top;
+            wrapSize = (int) (yAxisWidth * 2f + valueWidth * 2);
+        } else {
             wrapSize = 0;
         }
 //        LogUtil.d("TAGY",mYAxisData.getMaximum()+"__"+mYAxisData.getMinimum()+"__"+mYAxisData.getInterval()+"__"+mDataList.size());
